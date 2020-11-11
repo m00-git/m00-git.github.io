@@ -1,0 +1,8 @@
+Outline:
+Was had some outages
+Group frusturation
+Documented all reported outages through discord logs
+Emailed staff
+Talked to network man
+Made bash script to monitor network
+Internet upgraded!

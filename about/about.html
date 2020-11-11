@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>l33t.codes</title>
+	<meta name="description" content="A place to post things." />
+	<meta name="keywords" content="" />
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png?v=64c396dbef" />
+	<style type="text/css">
+	/*
+
+Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #000;
+}
+
+.hljs,
+.hljs-tag,
+.css .hljs-rules,
+.css .hljs-value,
+.css .hljs-function
+.hljs-preprocessor,
+.hljs-pragma {
+  color: rgb(0, 170, 170);
+  /*color: rgb(255, 85, 255);*/)
+}
+
+.hljs-strongemphasis,
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
+
+.hljs-bullet,
+.hljs-blockquote,
+.hljs-horizontal_rule,
+.hljs-number,
+.hljs-regexp,
+.alias .hljs-keyword,
+.hljs-literal,
+.hljs-hexcolor {
+  color: rgb(170, 0, 0);
+  /*color: rgb(170, 0, 170);*/
+}
+
+.hljs-tag .hljs-value,
+.hljs-code,
+.hljs-title,
+.css .hljs-class,
+.hljs-class .hljs-title:last-child {
+  color: rgb(85, 255, 85);
+}
+
+.hljs-link_url {
+  font-size: 80%;
+}
+
+.hljs-strong,
+.hljs-strongemphasis {
+  font-weight: bold;
+}
+
+.hljs-emphasis,
+.hljs-strongemphasis,
+.hljs-class .hljs-title:last-child {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-function,
+.hljs-change,
+.hljs-winutils,
+.hljs-flow,
+.lisp .hljs-title,
+.clojure .hljs-built_in,
+.nginx .hljs-title,
+.tex .hljs-special,
+.hljs-header,
+.hljs-attribute,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.hljs-tag .hljs-title,
+.hljs-value,
+.alias .hljs-keyword:first-child,
+.css .hljs-tag,
+.css .unit,
+.css .hljs-important {
+  color: rgb(255, 255, 85);
+  /*color: rgb(255, 85, 85);*/
+}
+
+.hljs-function .hljs-keyword,
+.hljs-class .hljs-keyword:first-child,
+.hljs-constant,
+.css .hljs-attribute {
+  color: rgb(85, 255, 255s);
+}
+
+.hljs-variable,
+.hljs-params,
+.hljs-class .hljs-title {
+  color: #f8f8f2;
+}
+
+.hljs-string,
+.css .hljs-id,
+.hljs-subst,
+.haskell .hljs-type,
+.ruby .hljs-class .hljs-parent,
+.hljs-built_in,
+.django .hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.django .hljs-filter .hljs-argument,
+.smalltalk .hljs-localvars,
+.smalltalk .hljs-array,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-addition,
+.hljs-stream,
+.hljs-envvar,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.hljs-prompt,
+.hljs-link_label,
+.hljs-link_url {
+  color: rgb(170, 85, 0);
+}
+
+.hljs-comment,
+.hljs-javadoc,
+.java .hljs-annotation,
+.python .hljs-decorator,
+.hljs-template_comment,
+.hljs-pi,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.tex .hljs-formula {
+  color: rgb(85, 85, 85);
+}
+
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata,
+.xml .php,
+.php .xml {
+  opacity: 0.5;
+}
+
+	</style>
+	<script src="/assets/js/skel.min.js?v=64c396dbef">
+		{
+			prefix		: "/assets/css/style",
+			resetCSS	: true,
+			boxModel	: "border",
+			grid		: {
+				gutters	: 30,
+			},
+			breakpoints	: {
+				wide	: { range : "922-", containers : 922, grid : { gutters : 50 } }
+				/*wide	: { range : "1200-", containers : 1140, grid : { gutters: 50 } },
+				narrow	: { range : "481-1199", containers : 960 },
+				mobile	: { range : "-480", containers : "fluid", lockViewport : true, grid : { collapse : true } }*/
+			}
+		}
+	</script>
+
+	<link rel="stylesheet" href="/assets/css/syntax.css">
+	<script src="/assets/js/highlight.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+
+	<script>
+		function drawImageAsANSI(imgSrc, canvasId, delayMs, onComplete) {
+			var canvas 	= document.getElementById(canvasId);
+			var context	= canvas.getContext('2d');
+			var img		= new Image();
+
+			img.addEventListener('load', function() {
+				var imgWidth 		= img.naturalWidth;
+				var imgHeight		= img.naturalHeight;
+				var tempCanvas		= document.createElement('canvas');
+				tempCanvas.width	= imgWidth;
+				tempCanvas.height	= imgHeight;
+				var tempContext 	= tempCanvas.getContext('2d');
+				tempContext.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+
+				tempContext.font	= '16pt 8x16';
+				var FONT_WIDTH		= tempContext.measureText('W').width;
+				var FONT_HEIGHT		= 16;
+
+				var columns			= imgWidth / FONT_WIDTH;
+				var rows			= imgHeight / FONT_HEIGHT;
+
+				var AnsiBlock = {
+					col	: 0,
+					row	: 0,
+
+					draw : function() {
+						var colPos = (this.col * FONT_WIDTH);
+						var rowPos = (this.row * FONT_HEIGHT);
+
+						//	Copy a block from tempContext
+						var imgData = tempContext.getImageData(
+							colPos,
+							rowPos + 3,
+							FONT_WIDTH,
+							FONT_HEIGHT);
+
+						context.putImageData(
+							imgData,
+							colPos,
+							rowPos
+							);
+					}
+				};
+				
+				var ansiLoad = setInterval(function() {
+					AnsiBlock.draw();
+					AnsiBlock.col++;
+
+					if(AnsiBlock.col >= columns) {
+						AnsiBlock.col = 0;
+						AnsiBlock.row++;
+					}
+
+					if(AnsiBlock.row >= rows) {
+						clearInterval(ansiLoad);
+
+						if(undefined != onComplete) {
+							onComplete();
+						}
+					}
+
+				}, delayMs);
+
+			}, false);
+
+			img.src = imgSrc;
+		}
+
+		document.onreadystatechange = function() {
+			var state = document.readyState;
+
+			if('interactive' == state) {
+
+			} else if ('complete' == state) {
+				var siteHeaderLeft	= '/assets/images/site-header-left.png'; 
+				var canvasId		= 'test-canvas';
+				var rightDiv 		= document.getElementById('site-header-right-div');
+				var cookie			= document.cookie;
+
+				var ansiLoad		= false;
+				if(-1 == cookie.indexOf('ansiLoad=', 0)) {
+					ansiLoad = true;
+
+					var now = new Date();
+					now.setDate(now.getDate() + 1);	//	a day from now
+					document.cookie = 'ansiLoad=0; expires=' + now.toUTCString() + '; path=/';
+				}
+				
+				//if('/' == window.location.pathname) {
+				if(ansiLoad) {
+					rightDiv.style.visibility = 'hidden';
+
+					drawImageAsANSI(siteHeaderLeft, canvasId, 10, function() {						
+						rightDiv.style.visibility = 'visible';
+					});
+				} else {
+					var canvas 	= document.getElementById(canvasId);
+					var context	= canvas.getContext('2d');
+					var img		= new Image();
+					img.src		= siteHeaderLeft;
+					img.onload	= function() {
+						context.drawImage(img, 0, 0);
+					};
+				}
+			}
+		};
+	</script>
+
+	<link rel="canonical" href="http://l33t.codes/" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="https://l33t.codes/page/2/" />
+    
+    <meta property="og:site_name" content="l33t.codes" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="l33t.codes" />
+    <meta property="og:description" content="A place to post things." />
+    <meta property="og:url" content="http://l33t.codes/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="l33t.codes" />
+    <meta name="twitter:description" content="A place to post things." />
+    <meta name="twitter:url" content="http://l33t.codes/" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "l33t.codes",
+    "url": "https://l33t.codes/",
+    "description": "A place to post things."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="l33t.codes" href="https://l33t.codes/rss/" />
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76099143-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</head>
+<body class="home-template">
+	<div class="container">
+		<header class="row flush">
+			<div class="6u">
+				<a href="/"><canvas class="site-header-left" id="test-canvas" width="471" height="195"></canvas></a>
+				<!--<a href="/"><img class="site-header-left" src="/assets/images/site-header-left.png?v=64c396dbef" /></a>-->
+			</div>
+			<div id="site-header-right-div" class="6u site-header-right">
+				<img src="/assets/images/site-header-right.png?v=64c396dbef" />
+				<div class="site-header-menu-container">
+					<a href="/about">About</a>  <a href="/projects">Projects</a>
+				</div>
+
+			</div>
+		</header>
+
+		
+<main class="content" role="main">
+    <div class="row">
+        <section class="9u" post>
+                <header class="post-header">
+                    <p><a href="/recent-enigma-1-2-contributions/">Recent ENiGMA 1/2 Contributed Guides</a> - <time datetime="2020-09-05">Saturday, September 5th, 2020</time></p>
+                </header>
+                <article class="post-article">
+                    <p>Just want to drop down some links to a couple of recent ENiGMA 1/2 guides contributed by users. It's awesome to see stuff like this about a hobby project! These are also certainly very useful to new users. Al's GeekLab How to Install ENiGMA 1/2: Here Al goes&hellip;</p>
+                </article>
+                <header class="post-header">
+                    <p><a href="/switching-to-firefox/">Switching to Firefox</a> - <time datetime="2019-06-22">Saturday, June 22nd, 2019</time></p>
+                </header>
+                <article class="post-article">
+                    <p>Goodbye Chrome! After at least 10 years of using Google's Chrome almost exclusively as a browser, I'm moving back to Mozilla Firefox. It's not like I haven't known Chrome is only there to collect data from me, but in the past it's been semi reasonable about it. That is, not&hellip;</p>
+                </article>
+                <header class="post-header">
+                    <p><a href="/bivrost/">Bivrost!</a> - <time datetime="2019-01-20">Sunday, January 20th, 2019</time></p>
+                </header>
+                <article class="post-article">
+                    <p>DOOR32.SYS Socket Sharing A common theme in "modern" (lolololol!) BBSing when it comes to doors is the DOOR32.SYS format and socket file descriptor sharing. Basically, a board dumps out a DOOR32.SYS file with the first line (comm type) set to Telnet (2), and the 2nd line (comm&hellip;</p>
+                </article>
+                <header class="post-header">
+                    <p><a href="/pkg-newer-freebsd-version-for-package-xxxxxx/">pkg: Newer FreeBSD version for package XXXXXX</a> - <time datetime="2018-11-06">Tuesday, November 6th, 2018</time></p>
+                </header>
+                <article class="post-article">
+                    <p>A quick tale of pkg woes: Ran into a odd thing tonight when attempting to update packages on my Mac Mini BSD box: ~&gt; sudo pkg update Updating FreeBSD repository catalogue...   Fetching meta.txz: 100%    944 B   0.9kB/s    00:01   Fetching packagesite.txz: 100%    6 MiB 677.5kB/&hellip;</p>
+                </article>
+                <header class="post-header">
+                    <p><a href="/retro-computing-awesome-list/">Retro Computing Awesome List</a> - <time datetime="2018-08-23">Thursday, August 23rd, 2018</time></p>
+                </header>
+                <article class="post-article">
+                    <p>Quick blurb: I've started an "Awesome List" of retro computing. Will be mostly focused on 80's-90's computing. In the era I was mostly a DOS kid, but I did work with Apple and C64/Amiga as well. With that said, the list is open to PR's and anything relevant can&hellip;</p>
+                </article>
+        </section>
+        <section class="3u index-right-nav-container">
+            <section>
+                <h1>External</h1>
+                <p><a href="http://stackoverflow.com/users/132064/nuskooler">SO</a></p>
+                <p><a href="http://about.me/bashby/">About.me</a></p>                
+            </section>
+        </section>
+    </div>
+
+
+	<nav class="pagination" role="navigation">
+    <span class="page-number">Page 1 of 7</span>
+        <a class="older-posts" href="/page/2/">older --&gt;</a>
+</nav>
+</main>
+
+
+		<footer class="row site-footer">
+				<div class="12u">
+					<img class="image-center" src="/assets/images/site-footer-top.png?v=64c396dbef" />
+				</div>
+				<div class="12u">
+					<span class="site-footer-copyright">
+						All Content Copyright (<span class="site-footer-copyright-c">C</span>) 2014-2017 <a href="mailto:bryan@l33t.codes">Bryan Ashby</a>
+					</span>
+				</div>
+				<div class="12u">
+					<img class="image-center" src="/assets/images/site-footer-bottom.png?v=64c396dbef" />
+				</div>
+	    </footer>
+	</div>
+
+	
+</body>
+</html>
+
