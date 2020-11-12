@@ -1,0 +1,58 @@
+First thing is to just check the website, looks like a boring default apache page. Next our nmap scan
+nmap -sV 10.10.75.134 -vv
+[nmapoutput]
+we see only ssh and apache is running
+next, bruteforce for directories on the server with gobuster
+gobuster dir -u http://10.10.75.134:80 -w /usr/share/wordlists/rockyou.txt
+[gobusteroutput]
+we see theres a /admin that we can access and a /server-status that we cant. So lets check out the /admin
+[loginform]
+we see a simple log in form here, checking the source we see a comment that the user login is admin
+[login-inspected]
+im going to use OWASP ZAP to bruteforce this page, but before we do im going to edit our wordlist since we know
+that the password is going to only be 6 characters long.
+cat rockyou.txt | grep -x '.\{6,6\}' > 6rock.txt
+then open up ZAP, if you arent familiar with ZAP you can check out the OWASP ZAP room. You can also use Hydra+BurpSuite
+for this step, but personally I find it easier to just use ZAP.
+After ZAP is running I make a test login with the credentials admin:secret, then I find that request and fuzz it
+[about2fuzz]
+then I select the text I want to be changed per each request, which is going to be the password input. Then I add the altered rockyou wordlist
+[zap-fuzzer]
+it doesnt take too long for ZAP to find the password, only 222 requests. I sorted the "code" as descending so when I get a successful login its
+the first thing I see.
+[zap-fuzzd]
+using the found creds we can now login to the admin page. Here we see our web flag and an RSA Private Key for the user john
+[adminlogged]
+I didnt know how to crack this key with john, but a quick google search of "crack -----BEGIN RSA PRIVATE KEY----- Proc-Type: 4,ENCRYPTED DEK-Info: AES-128"
+returned a blog post detailing the steps required, https://sql--injection.blogspot.com/p/decrypt-ssh-keys.html
+First we'll need a python script to convert this key to something readable by john, as ssh2john didnt work with the my jumbo version of john
+curl https://raw.githubusercontent.com/stricture/hashstack-server-plugin-jtr/master/scrapers/sshng2john.py > sshng2john.py
+then run the script on the rsakey
+python3 sshng2john.py id_rsa > crackme
+Theres some garbage data placed on the first line "16", go ahead and manually delete it. The hash file to be used by john should be only one line long. Your final output should look similar to this
+[crackmeoutput]
+then we can goahead and crack this with john
+john crackme --wordlist=/usr/share/wordlists/rockyou.txt
+[cracked]
+so now we have our ssh user and password, we can get our user shell.
+ssh -i rsa.key john@10.10.75.134
+I initially got an error but another quick google search got me the answer I needed, https://stackoverflow.com/questions/29933918/ssh-key-permissions-0644-for-id-rsa-pub-are-too-open-on-mac
+after changing the rsa.key permissions with
+chmod 400 rsa.key
+I was able to log on just fine and get the user flag
+[user]
+checking for privelage escalation paths with
+sudo -l
+we see cat can be ran as sudo. So getting the root flag is just a simple
+sudo cat /root/root.txt
+[root]
+but we also want the root password. So lets get the linux hashes and crack the root hash, get the output of the hashes with
+sudo cat /etc/shadow
+sudo cat /etc/passwd
+and save both of them to your local machine (just copy and paste from the terminal). I saved mine as shadow and passwd respectively.
+Then prepare them to be passed to john with
+unshadow passwd shadow > linuxhash
+now we can crack
+john --wordlist=/usr/share/wordlists/rockyou.txt linuxhash
+[roothash]
+all done!
