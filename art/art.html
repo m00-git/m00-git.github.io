@@ -4,31 +4,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div style="text-align: center;">
 <style>
-body {color: #d1d1d1;background-color: black;}
-pre {font-family:Courier New;font-size:.8vw;transform: scale(1,1);}
-a {color: #5cc2ca; text-decoration: none;}
-html,
-body,
-.section-images {
-  height: 100%;
-  margin: 0;
-}
-.section-images {
-  margin: auto 2em;
-  text-align: center;
-}
-img {
-  float: center;
-  display: block;
-  width: 70vw;
-  height: 40vw;
-  object-fit: stretch;
-  margin: 1vw auto;
-}
+    @font-face {
+    font-family: 'blockzoneregular';
+    src: url('../fonts/blockzone-webfont.woff2') format('woff2'),
+         url('../fonts/blockzone-webfont.woff') format('woff'),
+         url('../fonts/blockzone-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+      body { font-family: blockzoneregular;color: #d1d1d1;background-color: black;}
+      pre { font-family: blockzoneregular;font-size:1vw;transform: scale(1,1);}
+      h2 { font-family: blockzoneregular;color: #23A621}
+      h3 { font-family: blockzoneregular;color: #A8B6BD}
+      a { font-family: blockzoneregular;color: #0063FF;text-decoration: none}
+      p { font-family: blockzoneregular;line-height: .5vw;}
+      inv { font-family: blockzoneregular;background-color: #49006b; padding-top:2px;}
+      code { font-family: blockzoneregular; color:#B90001;font-weight: bold;}
+      b0 {font-family: blockzoneregular;color:#CF812C;}
+      
+      html,
+      body,
+      .section-images {
+       height: 100%;
+       margin: 0;
+      }
+      .section-images {
+       margin: auto 2em;
+       text-align: center;
+      }
+      img {
+       float: center;
+       display: block;
+       width: 70vw;
+       height: auto;
+       max-height: 45vw;
+       object-fit: contain;
+       margin: 1vw auto;
+      }
+   </style>
 </style>
 </head>
 <pre>
-<h4 style="text-align: left;"><a href="../index.html"><- Go Back</a></h4>
+<h4 style="text-align: left;"><a href="../index.html">                                  <- Go Back</a></h4>
 I really like retro digital art, and here you can find my attempts at emulating some of those styles.
 
 Title - Style - Software - Year
@@ -41,6 +58,8 @@ Title - Style - Software - Year
 <h3>Acidic Reflections - Retro CGI - Bryce 7 - 2020</h3>
 <img src="smile.png">
 <h3>Smile! - ANSI Art - Moebius - 2020</h3>
+<img src="emptiness.png">
+<h3>Emptiness - Retro CGI - Bryce 7 - 2020</h3>
 </section>
 </pre>
 </html>
