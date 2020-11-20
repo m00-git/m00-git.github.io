@@ -12,8 +12,7 @@
          url('../../../fonts/blockzone-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-
-}
+    }
       body { font-family: blockzoneregular;color: #d1d1d1;background-color: black;}
       pre { font-family: blockzoneregular;font-size:1vw;transform: scale(1,1);}
       h2 { font-family: blockzoneregular;color: #23A621}
@@ -31,8 +30,8 @@
        margin: 0;
       }
       .section-images {
-        margin: auto 2em;
-        text-align: left; 
+       margin: auto 2em;
+       text-align: left;
       }
       img {
        float: center;
@@ -47,5 +46,5 @@
 <center><div style="text-align: left;">
 <div style="width: 41vw; margin: 0 auto;">
 <pre><b0 class="b1">
-<h4 style="text-align: left;"><a href="../../blog.html"><- Go Back</a></h4>
+<h4 style="text-align: center;"><a href="../../../index.html">Home</a> | Blog | <a href="../../../art/art.html">Art</a> | <a href="../../../music/music.html">Music</a> | <a href="../../../about/about.html">About</a></h4>
 <!-- post under here -->
