@@ -41,8 +41,19 @@
        object-fit: contain;
        margin: 1vw auto;
       }
-   </style>
 </style>
+<script>
+if ('loading' in HTMLImageElement.prototype) {
+    // This uses the browser's own native lazy load
+    const imageElements = document.querySelectorAll('img[loading="lazy"]');
+    imgElements.forEach(img => { img.src = img.dataset.src; });
+} else {
+    // This downloads a polyfill from Cloudflare's CDN and makes it happen without the browser
+    const lazyScript = document.createElement('script');
+    lazyScript .src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js';
+    document.body.appendChild(lazyScript);
+}
+</script>
 </head>
 <center><div style="display: inline-block; text-align: center;">
 
@@ -52,15 +63,15 @@ I really like retro digital art, and here you can find my attempts at emulating 
 
 Title - Style - Software - Year
 <section class="section-images">
-<img src="blurredhorizon.png">
+<img src="blurredhorizon.png" loading="lazy">
 <h3>Blurred Horizon - Retro CGI - Bryce 7 - 2020</h3>
-<img src="peepoe.png">
+<img src="peepoe.png" loading="lazy">
 <h3>peepoe - ANSI Art - Moebius - 2020</h3>
-<img src="acidicreflections.png">
+<img src="acidicreflections.png" loading="lazy">
 <h3>Acidic Reflections - Retro CGI - Bryce 7 - 2020</h3>
-<img src="smile.png">
+<img src="smile.png" loading="lazy">
 <h3>Smile! - ANSI Art - Moebius - 2020</h3>
-<img src="emptiness.png">
+<img src="emptiness.png" loading="lazy">
 <h3>Emptiness - Retro CGI - Bryce 7 - 2020</h3>
 </section>
 </pre>
